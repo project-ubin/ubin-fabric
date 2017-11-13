@@ -1,0 +1,4 @@
+node_modules
+cc_version.txt
+ecosystem.config.js
+logs/

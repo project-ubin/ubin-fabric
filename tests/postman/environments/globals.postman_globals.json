@@ -1,0 +1,93 @@
+{
+  "id": "5a19c3de-13c0-b8dd-010e-d25ca7809150",
+  "name": "Postman Globals",
+  "values": [
+    {
+      "enabled": true,
+      "key": "PORT",
+      "type": "text",
+      "value": "8080"
+    },
+    {
+      "enabled": true,
+      "key": "CURRENCY",
+      "type": "text",
+      "value": "SGD"
+    },
+    {
+      "enabled": true,
+      "key": "mas",
+      "type": "text",
+      "value": "MASGSGSG"
+    },
+    {
+      "enabled": true,
+      "key": "baml",
+      "type": "text",
+      "value": "BOFASG2X"
+    },
+    {
+      "enabled": true,
+      "key": "jpm",
+      "type": "text",
+      "value": "CHASSGSG"
+    },
+    {
+      "enabled": true,
+      "key": "citi",
+      "type": "text",
+      "value": "CITISGSG"
+    },
+    {
+      "enabled": true,
+      "key": "cs",
+      "type": "text",
+      "value": "CSFBSGSX"
+    },
+    {
+      "enabled": true,
+      "key": "dbs",
+      "type": "text",
+      "value": "DBSSSGSG"
+    },
+    {
+      "enabled": true,
+      "key": "hsbc",
+      "type": "text",
+      "value": "HSBCSGSG"
+    },
+    {
+      "enabled": true,
+      "key": "mufg",
+      "type": "text",
+      "value": "MTBCSGSG"
+    },
+    {
+      "enabled": true,
+      "key": "ocbc",
+      "type": "text",
+      "value": "OCBCSGSG"
+    },
+    {
+      "enabled": true,
+      "key": "scb",
+      "type": "text",
+      "value": "SCBLSGSG"
+    },
+    {
+      "enabled": true,
+      "key": "uob",
+      "type": "text",
+      "value": "UOBVSGSG"
+    },
+    {
+      "enabled": true,
+      "key": "sgx",
+      "type": "text",
+      "value": "XSIMSGSG"
+    }
+  ],
+  "_postman_variable_scope": "globals",
+  "_postman_exported_at": "2017-11-12T07:46:38.244Z",
+  "_postman_exported_using": "Postman/5.3.2"
+}

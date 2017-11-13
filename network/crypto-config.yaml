@@ -1,0 +1,128 @@
+OrdererOrgs:
+  - Name: Orderer
+    Domain: example.com
+    Specs:
+      - Hostname: orderer
+
+PeerOrgs:
+  - Name: masgsgsg
+    Domain: masgsgsg.example.com
+    CA:
+      Hostname: ca
+    Template:
+      Count: 1
+    Users:
+      Count: 0
+    SANS:
+      - "FabricNx02"
+
+  - Name: bofasg2x
+    Domain: bofasg2x.example.com
+    CA:
+      Hostname: ca
+    Template:
+      Count: 1
+    Users:
+      Count: 0
+    SANS:
+      - "FabricNx03"
+  - Name: chassgsg
+    Domain: chassgsg.example.com
+    CA:
+      Hostname: ca
+    Template:
+      Count: 1
+    Users:
+      Count: 0
+    SANS:
+      - "FabricNx04"
+  - Name: citisgsg
+    Domain: citisgsg.example.com
+    CA:
+      Hostname: ca
+    Template:
+      Count: 1
+    Users:
+      Count: 0
+    SANS:
+      - "FabricNx05"
+  - Name: csfbsgsx
+    Domain: csfbsgsx.example.com
+    CA:
+      Hostname: ca
+    Template:
+      Count: 1
+    Users:
+      Count: 0
+    SANS:
+      - "FabricNx06"
+  - Name: dbsssgsg
+    Domain: dbsssgsg.example.com
+    CA:
+      Hostname: ca
+    Template:
+      Count: 1
+    Users:
+      Count: 0
+    SANS:
+      - "FabricNx07"
+  - Name: hsbcsgsg
+    Domain: hsbcsgsg.example.com
+    CA:
+      Hostname: ca
+    Template:
+      Count: 1
+    Users:
+      Count: 0
+    SANS:
+      - "FabricNx08"
+  - Name: mtbcsgsg
+    Domain: mtbcsgsg.example.com
+    CA:
+      Hostname: ca
+    Template:
+      Count: 1
+    Users:
+      Count: 0
+    SANS:
+      - "FabricNx09"
+  - Name: ocbcsgsg
+    Domain: ocbcsgsg.example.com
+    CA:
+      Hostname: ca
+    Template:
+      Count: 1
+    Users:
+      Count: 0
+    SANS:
+      - "FabricNx010"
+  - Name: scblsgsg
+    Domain: scblsgsg.example.com
+    CA:
+      Hostname: ca
+    Template:
+      Count: 1
+    Users:
+      Count: 0
+    SANS:
+      - "FabricNx011"
+  - Name: uobvsgsg
+    Domain: uobvsgsg.example.com
+    CA:
+      Hostname: ca
+    Template:
+      Count: 1
+    Users:
+      Count: 0
+    SANS:
+      - "FabricNx012"
+  - Name: xsimsgsg
+    Domain: xsimsgsg.example.com
+    CA:
+      Hostname: ca
+    Template:
+      Count: 1
+    Users:
+      Count: 0
+    SANS:
+      - "FabricNx013"

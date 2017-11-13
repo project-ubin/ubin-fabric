@@ -1,0 +1,489 @@
+{
+    "bankOrgMapping": {
+        "MASGSGSG": "org0",
+        "BOFASG2X": "org1",
+        "CHASSGSG": "org2",
+        "CITISGSG": "org3",
+        "CSFBSGSX": "org4",
+        "DBSSSGSG": "org5",
+        "HSBCSGSG": "org6",
+        "MTBCSGSG": "org7",
+        "OCBCSGSG": "org8",
+        "SCBLSGSG": "org9",
+        "UOBVSGSG": "org10",
+        "XSIMSGSG": "org11"
+    },
+    "regulators": [
+        "MASGSGSG"
+    ],
+    "chainCodeMapping": {
+        "netting": "nettingchannel_cc",
+        "funding": "fundingchannel_cc",
+        "bilateral": "bilateralchannel_cc"
+    },
+    "multilateralChannels": [
+        "fundingchannel",
+        "nettingchannel"
+    ],
+    "channelMapping": {
+        "nettingchannel": [
+            "FabricNx02:7051",
+            "FabricNx03:8051",
+            "FabricNx04:9051",
+            "FabricNx05:10051",
+            "FabricNx06:11051",
+            "FabricNx07:12051",
+            "FabricNx08:13051",
+            "FabricNx09:14051",
+            "FabricNx010:15051",
+            "FabricNx011:16051",
+            "FabricNx012:17051",
+            "FabricNx013:18051"
+        ],
+        "fundingchannel": [
+            "FabricNx02:7051"
+        ],
+        "bofasg2xchassgsgchannel": [
+            "FabricNx03:8051",
+            "FabricNx04:9051"
+        ],
+        "bofasg2xcitisgsgchannel": [
+            "FabricNx03:8051",
+            "FabricNx05:10051"
+        ],
+        "bofasg2xcsfbsgsxchannel": [
+            "FabricNx03:8051",
+            "FabricNx06:11051"
+        ],
+        "bofasg2xdbsssgsgchannel": [
+            "FabricNx03:8051",
+            "FabricNx07:12051"
+        ],
+        "bofasg2xhsbcsgsgchannel": [
+            "FabricNx03:8051",
+            "FabricNx08:13051"
+        ],
+        "bofasg2xmtbcsgsgchannel": [
+            "FabricNx03:8051",
+            "FabricNx09:14051"
+        ],
+        "bofasg2xocbcsgsgchannel": [
+            "FabricNx03:8051",
+            "FabricNx010:15051"
+        ],
+        "bofasg2xscblsgsgchannel": [
+            "FabricNx03:8051",
+            "FabricNx011:16051"
+        ],
+        "bofasg2xuobvsgsgchannel": [
+            "FabricNx03:8051",
+            "FabricNx012:17051"
+        ],
+        "bofasg2xxsimsgsgchannel": [
+            "FabricNx03:8051",
+            "FabricNx013:18051"
+        ],
+        "chassgsgcitisgsgchannel": [
+            "FabricNx04:9051",
+            "FabricNx05:10051"
+        ],
+        "chassgsgcsfbsgsxchannel": [
+            "FabricNx04:9051",
+            "FabricNx06:11051"
+        ],
+        "chassgsgdbsssgsgchannel": [
+            "FabricNx04:9051",
+            "FabricNx07:12051"
+        ],
+        "chassgsghsbcsgsgchannel": [
+            "FabricNx04:9051",
+            "FabricNx08:13051"
+        ],
+        "chassgsgmtbcsgsgchannel": [
+            "FabricNx04:9051",
+            "FabricNx09:14051"
+        ],
+        "chassgsgocbcsgsgchannel": [
+            "FabricNx04:9051",
+            "FabricNx010:15051"
+        ],
+        "chassgsgscblsgsgchannel": [
+            "FabricNx04:9051",
+            "FabricNx011:16051"
+        ],
+        "chassgsguobvsgsgchannel": [
+            "FabricNx04:9051",
+            "FabricNx012:17051"
+        ],
+        "chassgsgxsimsgsgchannel": [
+            "FabricNx04:9051",
+            "FabricNx013:18051"
+        ],
+        "citisgsgcsfbsgsxchannel": [
+            "FabricNx05:10051",
+            "FabricNx06:11051"
+        ],
+        "citisgsgdbsssgsgchannel": [
+            "FabricNx05:10051",
+            "FabricNx07:12051"
+        ],
+        "citisgsghsbcsgsgchannel": [
+            "FabricNx05:10051",
+            "FabricNx08:13051"
+        ],
+        "citisgsgmtbcsgsgchannel": [
+            "FabricNx05:10051",
+            "FabricNx09:14051"
+        ],
+        "citisgsgocbcsgsgchannel": [
+            "FabricNx05:10051",
+            "FabricNx010:15051"
+        ],
+        "citisgsgscblsgsgchannel": [
+            "FabricNx05:10051",
+            "FabricNx011:16051"
+        ],
+        "citisgsguobvsgsgchannel": [
+            "FabricNx05:10051",
+            "FabricNx012:17051"
+        ],
+        "citisgsgxsimsgsgchannel": [
+            "FabricNx05:10051",
+            "FabricNx013:18051"
+        ],
+        "csfbsgsxdbsssgsgchannel": [
+            "FabricNx06:11051",
+            "FabricNx07:12051"
+        ],
+        "csfbsgsxhsbcsgsgchannel": [
+            "FabricNx06:11051",
+            "FabricNx08:13051"
+        ],
+        "csfbsgsxmtbcsgsgchannel": [
+            "FabricNx06:11051",
+            "FabricNx09:14051"
+        ],
+        "csfbsgsxocbcsgsgchannel": [
+            "FabricNx06:11051",
+            "FabricNx010:15051"
+        ],
+        "csfbsgsxscblsgsgchannel": [
+            "FabricNx06:11051",
+            "FabricNx011:16051"
+        ],
+        "csfbsgsxuobvsgsgchannel": [
+            "FabricNx06:11051",
+            "FabricNx012:17051"
+        ],
+        "csfbsgsxxsimsgsgchannel": [
+            "FabricNx06:11051",
+            "FabricNx013:18051"
+        ],
+        "dbsssgsghsbcsgsgchannel": [
+            "FabricNx07:12051",
+            "FabricNx08:13051"
+        ],
+        "dbsssgsgmtbcsgsgchannel": [
+            "FabricNx07:12051",
+            "FabricNx09:14051"
+        ],
+        "dbsssgsgocbcsgsgchannel": [
+            "FabricNx07:12051",
+            "FabricNx010:15051"
+        ],
+        "dbsssgsgscblsgsgchannel": [
+            "FabricNx07:12051",
+            "FabricNx011:16051"
+        ],
+        "dbsssgsguobvsgsgchannel": [
+            "FabricNx07:12051",
+            "FabricNx012:17051"
+        ],
+        "dbsssgsgxsimsgsgchannel": [
+            "FabricNx07:12051",
+            "FabricNx013:18051"
+        ],
+        "hsbcsgsgmtbcsgsgchannel": [
+            "FabricNx08:13051",
+            "FabricNx09:14051"
+        ],
+        "hsbcsgsgocbcsgsgchannel": [
+            "FabricNx08:13051",
+            "FabricNx010:15051"
+        ],
+        "hsbcsgsgscblsgsgchannel": [
+            "FabricNx08:13051",
+            "FabricNx011:16051"
+        ],
+        "hsbcsgsguobvsgsgchannel": [
+            "FabricNx08:13051",
+            "FabricNx012:17051"
+        ],
+        "hsbcsgsgxsimsgsgchannel": [
+            "FabricNx08:13051",
+            "FabricNx013:18051"
+        ],
+        "mtbcsgsgocbcsgsgchannel": [
+            "FabricNx09:14051",
+            "FabricNx010:15051"
+        ],
+        "mtbcsgsgscblsgsgchannel": [
+            "FabricNx09:14051",
+            "FabricNx011:16051"
+        ],
+        "mtbcsgsguobvsgsgchannel": [
+            "FabricNx09:14051",
+            "FabricNx012:17051"
+        ],
+        "mtbcsgsgxsimsgsgchannel": [
+            "FabricNx09:14051",
+            "FabricNx013:18051"
+        ],
+        "ocbcsgsgscblsgsgchannel": [
+            "FabricNx010:15051",
+            "FabricNx011:16051"
+        ],
+        "ocbcsgsguobvsgsgchannel": [
+            "FabricNx010:15051",
+            "FabricNx012:17051"
+        ],
+        "ocbcsgsgxsimsgsgchannel": [
+            "FabricNx010:15051",
+            "FabricNx013:18051"
+        ],
+        "scblsgsguobvsgsgchannel": [
+            "FabricNx011:16051",
+            "FabricNx012:17051"
+        ],
+        "scblsgsgxsimsgsgchannel": [
+            "FabricNx011:16051",
+            "FabricNx013:18051"
+        ],
+        "uobvsgsgxsimsgsgchannel": [
+            "FabricNx012:17051",
+            "FabricNx013:18051"
+        ]
+    },
+    "channelBankMapping": {
+        "bofasg2xchassgsgchannel": [
+            "CHASSGSG",
+            "BOFASG2X"
+        ],
+        "bofasg2xcitisgsgchannel": [
+            "BOFASG2X",
+            "CITISGSG"
+        ],
+        "bofasg2xcsfbsgsxchannel": [
+            "BOFASG2X",
+            "CSFBSGSX"
+        ],
+        "bofasg2xdbsssgsgchannel": [
+            "DBSSSGSG",
+            "BOFASG2X"
+        ],
+        "bofasg2xhsbcsgsgchannel": [
+            "BOFASG2X",
+            "HSBCSGSG"
+        ],
+        "bofasg2xmtbcsgsgchannel": [
+            "MTBCSGSG",
+            "BOFASG2X"
+        ],
+        "bofasg2xocbcsgsgchannel": [
+            "BOFASG2X",
+            "OCBCSGSG"
+        ],
+        "bofasg2xscblsgsgchannel": [
+            "SCBLSGSG",
+            "BOFASG2X"
+        ],
+        "bofasg2xuobvsgsgchannel": [
+            "UOBVSGSG",
+            "BOFASG2X"
+        ],
+        "bofasg2xxsimsgsgchannel": [
+            "BOFASG2X",
+            "XSIMSGSG"
+        ],
+        "chassgsgcitisgsgchannel": [
+            "CHASSGSG",
+            "CITISGSG"
+        ],
+        "chassgsgcsfbsgsxchannel": [
+            "CSFBSGSX",
+            "CHASSGSG"
+        ],
+        "chassgsgdbsssgsgchannel": [
+            "CHASSGSG",
+            "DBSSSGSG"
+        ],
+        "chassgsghsbcsgsgchannel": [
+            "CHASSGSG",
+            "HSBCSGSG"
+        ],
+        "chassgsgmtbcsgsgchannel": [
+            "MTBCSGSG",
+            "CHASSGSG"
+        ],
+        "chassgsgocbcsgsgchannel": [
+            "CHASSGSG",
+            "OCBCSGSG"
+        ],
+        "chassgsgscblsgsgchannel": [
+            "CHASSGSG",
+            "SCBLSGSG"
+        ],
+        "chassgsguobvsgsgchannel": [
+            "CHASSGSG",
+            "UOBVSGSG"
+        ],
+        "chassgsgxsimsgsgchannel": [
+            "CHASSGSG",
+            "XSIMSGSG"
+        ],
+        "citisgsgcsfbsgsxchannel": [
+            "CSFBSGSX",
+            "CITISGSG"
+        ],
+        "citisgsgdbsssgsgchannel": [
+            "DBSSSGSG",
+            "CITISGSG"
+        ],
+        "citisgsghsbcsgsgchannel": [
+            "HSBCSGSG",
+            "CITISGSG"
+        ],
+        "citisgsgmtbcsgsgchannel": [
+            "MTBCSGSG",
+            "CITISGSG"
+        ],
+        "citisgsgocbcsgsgchannel": [
+            "OCBCSGSG",
+            "CITISGSG"
+        ],
+        "citisgsgscblsgsgchannel": [
+            "SCBLSGSG",
+            "CITISGSG"
+        ],
+        "citisgsguobvsgsgchannel": [
+            "UOBVSGSG",
+            "CITISGSG"
+        ],
+        "citisgsgxsimsgsgchannel": [
+            "CITISGSG",
+            "XSIMSGSG"
+        ],
+        "csfbsgsxdbsssgsgchannel": [
+            "CSFBSGSX",
+            "DBSSSGSG"
+        ],
+        "csfbsgsxhsbcsgsgchannel": [
+            "CSFBSGSX",
+            "HSBCSGSG"
+        ],
+        "csfbsgsxmtbcsgsgchannel": [
+            "CSFBSGSX",
+            "MTBCSGSG"
+        ],
+        "csfbsgsxocbcsgsgchannel": [
+            "CSFBSGSX",
+            "OCBCSGSG"
+        ],
+        "csfbsgsxscblsgsgchannel": [
+            "CSFBSGSX",
+            "SCBLSGSG"
+        ],
+        "csfbsgsxuobvsgsgchannel": [
+            "CSFBSGSX",
+            "UOBVSGSG"
+        ],
+        "csfbsgsxxsimsgsgchannel": [
+            "CSFBSGSX",
+            "XSIMSGSG"
+        ],
+        "dbsssgsghsbcsgsgchannel": [
+            "DBSSSGSG",
+            "HSBCSGSG"
+        ],
+        "dbsssgsgmtbcsgsgchannel": [
+            "MTBCSGSG",
+            "DBSSSGSG"
+        ],
+        "dbsssgsgocbcsgsgchannel": [
+            "OCBCSGSG",
+            "DBSSSGSG"
+        ],
+        "dbsssgsgscblsgsgchannel": [
+            "SCBLSGSG",
+            "DBSSSGSG"
+        ],
+        "dbsssgsguobvsgsgchannel": [
+            "DBSSSGSG",
+            "UOBVSGSG"
+        ],
+        "dbsssgsgxsimsgsgchannel": [
+            "DBSSSGSG",
+            "XSIMSGSG"
+        ],
+        "hsbcsgsgmtbcsgsgchannel": [
+            "MTBCSGSG",
+            "HSBCSGSG"
+        ],
+        "hsbcsgsgocbcsgsgchannel": [
+            "OCBCSGSG",
+            "HSBCSGSG"
+        ],
+        "hsbcsgsgscblsgsgchannel": [
+            "SCBLSGSG",
+            "HSBCSGSG"
+        ],
+        "hsbcsgsguobvsgsgchannel": [
+            "UOBVSGSG",
+            "HSBCSGSG"
+        ],
+        "hsbcsgsgxsimsgsgchannel": [
+            "HSBCSGSG",
+            "XSIMSGSG"
+        ],
+        "mtbcsgsgocbcsgsgchannel": [
+            "MTBCSGSG",
+            "OCBCSGSG"
+        ],
+        "mtbcsgsgscblsgsgchannel": [
+            "MTBCSGSG",
+            "SCBLSGSG"
+        ],
+        "mtbcsgsguobvsgsgchannel": [
+            "MTBCSGSG",
+            "UOBVSGSG"
+        ],
+        "mtbcsgsgxsimsgsgchannel": [
+            "MTBCSGSG",
+            "XSIMSGSG"
+        ],
+        "ocbcsgsgscblsgsgchannel": [
+            "OCBCSGSG",
+            "SCBLSGSG"
+        ],
+        "ocbcsgsguobvsgsgchannel": [
+            "OCBCSGSG",
+            "UOBVSGSG"
+        ],
+        "ocbcsgsgxsimsgsgchannel": [
+            "OCBCSGSG",
+            "XSIMSGSG"
+        ],
+        "scblsgsguobvsgsgchannel": [
+            "SCBLSGSG",
+            "UOBVSGSG"
+        ],
+        "scblsgsgxsimsgsgchannel": [
+            "SCBLSGSG",
+            "XSIMSGSG"
+        ],
+        "uobvsgsgxsimsgsgchannel": [
+            "UOBVSGSG",
+            "XSIMSGSG"
+        ]
+    }
+}

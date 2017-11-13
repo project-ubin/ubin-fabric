@@ -1,0 +1,1239 @@
+#
+# Docker swarm configuration for ubin fabric network.
+# This is generated automatically by network-gen.sh.
+#
+
+version: '3.2'
+
+services:
+
+###############################################
+# Orderer
+###############################################
+
+  orderer:
+    container_name: orderer.example.com
+    image: hyperledger/fabric-orderer:x86_64-1.0.1
+    environment:
+      - ORDERER_GENERAL_LOGLEVEL=debug
+      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+      - ORDERER_GENERAL_GENESISMETHOD=file
+      - ORDERER_GENERAL_GENESISFILE=/etc/hyperledger/configtx/genesis.block
+      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+      - ORDERER_GENERAL_LOCALMSPDIR=/etc/hyperledger/crypto/orderer/msp
+      - ORDERER_GENERAL_TLS_ENABLED=false
+      - ORDERER_GENERAL_TLS_PRIVATEKEY=/etc/hyperledger/crypto/orderer/tls/server.key
+      - ORDERER_GENERAL_TLS_CERTIFICATE=/etc/hyperledger/crypto/orderer/tls/server.crt
+      - ORDERER_GENERAL_TLS_ROOTCAS=[/etc/hyperledger/crypto/orderer/tls/ca.crt, /etc/hyperledger/crypto/peermasgsgsg/tls/ca.crt, /etc/hyperledger/crypto/peerbofasg2x/tls/ca.crt, /etc/hyperledger/crypto/peerchassgsg/tls/ca.crt, /etc/hyperledger/crypto/peercitisgsg/tls/ca.crt, /etc/hyperledger/crypto/peercsfbsgsx/tls/ca.crt, /etc/hyperledger/crypto/peerdbsssgsg/tls/ca.crt, /etc/hyperledger/crypto/peerhsbcsgsg/tls/ca.crt, /etc/hyperledger/crypto/peermtbcsgsg/tls/ca.crt, /etc/hyperledger/crypto/peerocbcsgsg/tls/ca.crt, /etc/hyperledger/crypto/peerscblsgsg/tls/ca.crt, /etc/hyperledger/crypto/peeruobvsgsg/tls/ca.crt, /etc/hyperledger/crypto/peerxsimsgsg/tls/ca.crt]
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+    command: orderer
+    ports:
+      - 7050:7050
+    volumes:
+        - ./channel-artifacts/:/etc/hyperledger/configtx
+        - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/:/etc/hyperledger/crypto/orderer
+        - ./crypto-config/peerOrganizations/masgsgsg.example.com/peers/peer0.masgsgsg.example.com/:/etc/hyperledger/crypto/peermasgsgsg
+        - ./crypto-config/peerOrganizations/bofasg2x.example.com/peers/peer0.bofasg2x.example.com/:/etc/hyperledger/crypto/peerbofasg2x
+        - ./crypto-config/peerOrganizations/chassgsg.example.com/peers/peer0.chassgsg.example.com/:/etc/hyperledger/crypto/peerchassgsg
+        - ./crypto-config/peerOrganizations/citisgsg.example.com/peers/peer0.citisgsg.example.com/:/etc/hyperledger/crypto/peercitisgsg
+        - ./crypto-config/peerOrganizations/csfbsgsx.example.com/peers/peer0.csfbsgsx.example.com/:/etc/hyperledger/crypto/peercsfbsgsx
+        - ./crypto-config/peerOrganizations/dbsssgsg.example.com/peers/peer0.dbsssgsg.example.com/:/etc/hyperledger/crypto/peerdbsssgsg
+        - ./crypto-config/peerOrganizations/hsbcsgsg.example.com/peers/peer0.hsbcsgsg.example.com/:/etc/hyperledger/crypto/peerhsbcsgsg
+        - ./crypto-config/peerOrganizations/mtbcsgsg.example.com/peers/peer0.mtbcsgsg.example.com/:/etc/hyperledger/crypto/peermtbcsgsg
+        - ./crypto-config/peerOrganizations/ocbcsgsg.example.com/peers/peer0.ocbcsgsg.example.com/:/etc/hyperledger/crypto/peerocbcsgsg
+        - ./crypto-config/peerOrganizations/scblsgsg.example.com/peers/peer0.scblsgsg.example.com/:/etc/hyperledger/crypto/peerscblsgsg
+        - ./crypto-config/peerOrganizations/uobvsgsg.example.com/peers/peer0.uobvsgsg.example.com/:/etc/hyperledger/crypto/peeruobvsgsg
+        - ./crypto-config/peerOrganizations/xsimsgsg.example.com/peers/peer0.xsimsgsg.example.com/:/etc/hyperledger/crypto/peerxsimsgsg
+    networks:
+      fabric:
+        aliases:
+          - orderer.example.com
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.role == manager]
+
+###############################################
+# MASGSGSG organization
+###############################################
+  
+  ca-masgsgsg:
+    container_name: ca.masgsgsg.example.com
+    image: hyperledger/fabric-ca:x86_64-1.0.1
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.masgsgsg.example.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.masgsgsg.example.com-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/4ec9329a2051a26ad7066268e0121d6b6b40b4573907625febd04847b76bde8a_sk
+      - FABRIC_CA_SERVER_TLS_ENABLED=false
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.masgsgsg.example.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/4ec9329a2051a26ad7066268e0121d6b6b40b4573907625febd04847b76bde8a_sk
+    ports:
+      - "7054:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/masgsgsg.example.com/ca:/etc/hyperledger/fabric-ca-server-config
+    networks:
+      fabric:
+        aliases:
+          - ca.masgsgsg.example.com
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx02]
+
+  peer0-masgsgsg:
+    container_name: peer0.masgsgsg.example.com
+    image: hyperledger/fabric-peer:x86_64-1.0.1
+    environment:
+      - CORE_LOGGING_PEER=debug
+      - CORE_CHAINCODE_LOGGING_LEVEL=DEBUG
+      - CORE_CHAINCODE_KEEPALIVE=180
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_PEER_ID=peer0.masgsgsg.example.com
+      - CORE_PEER_ADDRESS=peer0.masgsgsg.example.com:7051
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=ubin_fabric
+      - CORE_PEER_LOCALMSPID=masgsgsgMSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/crypto/peer/msp
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb-masgsgsg:5984
+      - CORE_CHAINCODE_STARTUPTIMEOUT=600s
+      - CORE_CHAINCODE_DEPLOYTIMEOUT=600s
+      - CORE_PEER_TLS_ENABLED=false
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/crypto/peer/tls/server.key
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/crypto/peer/tls/server.crt
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/crypto/peer/tls/ca.crt
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: sh -c 'sleep 60; peer node start'
+    ports:
+      - 7051:7051
+      - 7053:7053
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./channel-artifacts/:/etc/hyperledger/configtx
+      - ./crypto-config/peerOrganizations/masgsgsg.example.com/peers/peer0.masgsgsg.example.com/:/etc/hyperledger/crypto/peer
+      - ./crypto-config/peerOrganizations/masgsgsg.example.com/users:/etc/hyperledger/crypto/msp/users
+      - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/:/etc/hyperledger/crypto/orderer
+    depends_on:
+      - orderer.example.com
+      - couchdb-masgsgsg
+    networks:
+      fabric:
+        aliases:
+          - peer0.masgsgsg.example.com
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx02]
+
+  couchdb-masgsgsg:
+    container_name: couchdb-masgsgsg
+    image: hyperledger/fabric-couchdb:x86_64-1.0.1
+    ports:
+      - 5984:5984
+    environment:
+      DB_URL: http://localhost:5984/member_db
+    networks:
+      fabric:
+        aliases:
+          - couchdb-masgsgsg
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx02]
+
+###############################################
+# BOFASG2X organization
+###############################################
+  
+  ca-bofasg2x:
+    container_name: ca.bofasg2x.example.com
+    image: hyperledger/fabric-ca:x86_64-1.0.1
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.bofasg2x.example.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.bofasg2x.example.com-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/46213eb308f805eabf56f35fac8d389b49e03a13ede77dfa23ff017b82d0a6e4_sk
+      - FABRIC_CA_SERVER_TLS_ENABLED=false
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.bofasg2x.example.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/46213eb308f805eabf56f35fac8d389b49e03a13ede77dfa23ff017b82d0a6e4_sk
+    ports:
+      - "8054:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/bofasg2x.example.com/ca:/etc/hyperledger/fabric-ca-server-config
+    networks:
+      fabric:
+        aliases:
+          - ca.bofasg2x.example.com
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx03]
+
+  peer0-bofasg2x:
+    container_name: peer0.bofasg2x.example.com
+    image: hyperledger/fabric-peer:x86_64-1.0.1
+    environment:
+      - CORE_LOGGING_PEER=debug
+      - CORE_CHAINCODE_LOGGING_LEVEL=DEBUG
+      - CORE_CHAINCODE_KEEPALIVE=180
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_PEER_ID=peer0.bofasg2x.example.com
+      - CORE_PEER_ADDRESS=peer0.bofasg2x.example.com:7051
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=ubin_fabric
+      - CORE_PEER_LOCALMSPID=bofasg2xMSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/crypto/peer/msp
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb-bofasg2x:5984
+      - CORE_CHAINCODE_STARTUPTIMEOUT=600s
+      - CORE_CHAINCODE_DEPLOYTIMEOUT=600s
+      - CORE_PEER_TLS_ENABLED=false
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/crypto/peer/tls/server.key
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/crypto/peer/tls/server.crt
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/crypto/peer/tls/ca.crt
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: sh -c 'sleep 60; peer node start'
+    ports:
+      - 8051:7051
+      - 8053:7053
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./channel-artifacts/:/etc/hyperledger/configtx
+      - ./crypto-config/peerOrganizations/bofasg2x.example.com/peers/peer0.bofasg2x.example.com/:/etc/hyperledger/crypto/peer
+      - ./crypto-config/peerOrganizations/bofasg2x.example.com/users:/etc/hyperledger/crypto/msp/users
+      - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/:/etc/hyperledger/crypto/orderer
+    depends_on:
+      - orderer.example.com
+      - couchdb-bofasg2x
+    networks:
+      fabric:
+        aliases:
+          - peer0.bofasg2x.example.com
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx03]
+
+  couchdb-bofasg2x:
+    container_name: couchdb-bofasg2x
+    image: hyperledger/fabric-couchdb:x86_64-1.0.1
+    ports:
+      - 6984:5984
+    environment:
+      DB_URL: http://localhost:5984/member_db
+    networks:
+      fabric:
+        aliases:
+          - couchdb-bofasg2x
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx03]
+
+###############################################
+# CHASSGSG organization
+###############################################
+  
+  ca-chassgsg:
+    container_name: ca.chassgsg.example.com
+    image: hyperledger/fabric-ca:x86_64-1.0.1
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.chassgsg.example.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.chassgsg.example.com-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/0121a2f25668426d74af340ae39cd2b576a0d370d61434cc058c69f0e9cdcca1_sk
+      - FABRIC_CA_SERVER_TLS_ENABLED=false
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.chassgsg.example.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/0121a2f25668426d74af340ae39cd2b576a0d370d61434cc058c69f0e9cdcca1_sk
+    ports:
+      - "9054:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/chassgsg.example.com/ca:/etc/hyperledger/fabric-ca-server-config
+    networks:
+      fabric:
+        aliases:
+          - ca.chassgsg.example.com
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx04]
+
+  peer0-chassgsg:
+    container_name: peer0.chassgsg.example.com
+    image: hyperledger/fabric-peer:x86_64-1.0.1
+    environment:
+      - CORE_LOGGING_PEER=debug
+      - CORE_CHAINCODE_LOGGING_LEVEL=DEBUG
+      - CORE_CHAINCODE_KEEPALIVE=180
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_PEER_ID=peer0.chassgsg.example.com
+      - CORE_PEER_ADDRESS=peer0.chassgsg.example.com:7051
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=ubin_fabric
+      - CORE_PEER_LOCALMSPID=chassgsgMSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/crypto/peer/msp
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb-chassgsg:5984
+      - CORE_CHAINCODE_STARTUPTIMEOUT=600s
+      - CORE_CHAINCODE_DEPLOYTIMEOUT=600s
+      - CORE_PEER_TLS_ENABLED=false
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/crypto/peer/tls/server.key
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/crypto/peer/tls/server.crt
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/crypto/peer/tls/ca.crt
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: sh -c 'sleep 60; peer node start'
+    ports:
+      - 9051:7051
+      - 9053:7053
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./channel-artifacts/:/etc/hyperledger/configtx
+      - ./crypto-config/peerOrganizations/chassgsg.example.com/peers/peer0.chassgsg.example.com/:/etc/hyperledger/crypto/peer
+      - ./crypto-config/peerOrganizations/chassgsg.example.com/users:/etc/hyperledger/crypto/msp/users
+      - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/:/etc/hyperledger/crypto/orderer
+    depends_on:
+      - orderer.example.com
+      - couchdb-chassgsg
+    networks:
+      fabric:
+        aliases:
+          - peer0.chassgsg.example.com
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx04]
+
+  couchdb-chassgsg:
+    container_name: couchdb-chassgsg
+    image: hyperledger/fabric-couchdb:x86_64-1.0.1
+    ports:
+      - 7984:5984
+    environment:
+      DB_URL: http://localhost:5984/member_db
+    networks:
+      fabric:
+        aliases:
+          - couchdb-chassgsg
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx04]
+
+###############################################
+# CITISGSG organization
+###############################################
+  
+  ca-citisgsg:
+    container_name: ca.citisgsg.example.com
+    image: hyperledger/fabric-ca:x86_64-1.0.1
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.citisgsg.example.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.citisgsg.example.com-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/6d7f7e7459631a9cdab869ace0165eee9ff1f43a5684ba3369808555b241ec73_sk
+      - FABRIC_CA_SERVER_TLS_ENABLED=false
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.citisgsg.example.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/6d7f7e7459631a9cdab869ace0165eee9ff1f43a5684ba3369808555b241ec73_sk
+    ports:
+      - "10054:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/citisgsg.example.com/ca:/etc/hyperledger/fabric-ca-server-config
+    networks:
+      fabric:
+        aliases:
+          - ca.citisgsg.example.com
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx05]
+
+  peer0-citisgsg:
+    container_name: peer0.citisgsg.example.com
+    image: hyperledger/fabric-peer:x86_64-1.0.1
+    environment:
+      - CORE_LOGGING_PEER=debug
+      - CORE_CHAINCODE_LOGGING_LEVEL=DEBUG
+      - CORE_CHAINCODE_KEEPALIVE=180
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_PEER_ID=peer0.citisgsg.example.com
+      - CORE_PEER_ADDRESS=peer0.citisgsg.example.com:7051
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=ubin_fabric
+      - CORE_PEER_LOCALMSPID=citisgsgMSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/crypto/peer/msp
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb-citisgsg:5984
+      - CORE_CHAINCODE_STARTUPTIMEOUT=600s
+      - CORE_CHAINCODE_DEPLOYTIMEOUT=600s
+      - CORE_PEER_TLS_ENABLED=false
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/crypto/peer/tls/server.key
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/crypto/peer/tls/server.crt
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/crypto/peer/tls/ca.crt
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: sh -c 'sleep 60; peer node start'
+    ports:
+      - 10051:7051
+      - 10053:7053
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./channel-artifacts/:/etc/hyperledger/configtx
+      - ./crypto-config/peerOrganizations/citisgsg.example.com/peers/peer0.citisgsg.example.com/:/etc/hyperledger/crypto/peer
+      - ./crypto-config/peerOrganizations/citisgsg.example.com/users:/etc/hyperledger/crypto/msp/users
+      - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/:/etc/hyperledger/crypto/orderer
+    depends_on:
+      - orderer.example.com
+      - couchdb-citisgsg
+    networks:
+      fabric:
+        aliases:
+          - peer0.citisgsg.example.com
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx05]
+
+  couchdb-citisgsg:
+    container_name: couchdb-citisgsg
+    image: hyperledger/fabric-couchdb:x86_64-1.0.1
+    ports:
+      - 8984:5984
+    environment:
+      DB_URL: http://localhost:5984/member_db
+    networks:
+      fabric:
+        aliases:
+          - couchdb-citisgsg
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx05]
+
+###############################################
+# CSFBSGSX organization
+###############################################
+  
+  ca-csfbsgsx:
+    container_name: ca.csfbsgsx.example.com
+    image: hyperledger/fabric-ca:x86_64-1.0.1
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.csfbsgsx.example.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.csfbsgsx.example.com-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/fe6f1a8246f49e6e8529501495de4bacc61921bda5ee0d443afdbbb6628035e9_sk
+      - FABRIC_CA_SERVER_TLS_ENABLED=false
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.csfbsgsx.example.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/fe6f1a8246f49e6e8529501495de4bacc61921bda5ee0d443afdbbb6628035e9_sk
+    ports:
+      - "11054:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/csfbsgsx.example.com/ca:/etc/hyperledger/fabric-ca-server-config
+    networks:
+      fabric:
+        aliases:
+          - ca.csfbsgsx.example.com
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx06]
+
+  peer0-csfbsgsx:
+    container_name: peer0.csfbsgsx.example.com
+    image: hyperledger/fabric-peer:x86_64-1.0.1
+    environment:
+      - CORE_LOGGING_PEER=debug
+      - CORE_CHAINCODE_LOGGING_LEVEL=DEBUG
+      - CORE_CHAINCODE_KEEPALIVE=180
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_PEER_ID=peer0.csfbsgsx.example.com
+      - CORE_PEER_ADDRESS=peer0.csfbsgsx.example.com:7051
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=ubin_fabric
+      - CORE_PEER_LOCALMSPID=csfbsgsxMSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/crypto/peer/msp
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb-csfbsgsx:5984
+      - CORE_CHAINCODE_STARTUPTIMEOUT=600s
+      - CORE_CHAINCODE_DEPLOYTIMEOUT=600s
+      - CORE_PEER_TLS_ENABLED=false
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/crypto/peer/tls/server.key
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/crypto/peer/tls/server.crt
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/crypto/peer/tls/ca.crt
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: sh -c 'sleep 60; peer node start'
+    ports:
+      - 11051:7051
+      - 11053:7053
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./channel-artifacts/:/etc/hyperledger/configtx
+      - ./crypto-config/peerOrganizations/csfbsgsx.example.com/peers/peer0.csfbsgsx.example.com/:/etc/hyperledger/crypto/peer
+      - ./crypto-config/peerOrganizations/csfbsgsx.example.com/users:/etc/hyperledger/crypto/msp/users
+      - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/:/etc/hyperledger/crypto/orderer
+    depends_on:
+      - orderer.example.com
+      - couchdb-csfbsgsx
+    networks:
+      fabric:
+        aliases:
+          - peer0.csfbsgsx.example.com
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx06]
+
+  couchdb-csfbsgsx:
+    container_name: couchdb-csfbsgsx
+    image: hyperledger/fabric-couchdb:x86_64-1.0.1
+    ports:
+      - 9984:5984
+    environment:
+      DB_URL: http://localhost:5984/member_db
+    networks:
+      fabric:
+        aliases:
+          - couchdb-csfbsgsx
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx06]
+
+###############################################
+# DBSSSGSG organization
+###############################################
+  
+  ca-dbsssgsg:
+    container_name: ca.dbsssgsg.example.com
+    image: hyperledger/fabric-ca:x86_64-1.0.1
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.dbsssgsg.example.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.dbsssgsg.example.com-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/021a251c337040e912eb2294e1caa809cd9ea1a3d4ff879108b11d3a1028e9b4_sk
+      - FABRIC_CA_SERVER_TLS_ENABLED=false
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.dbsssgsg.example.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/021a251c337040e912eb2294e1caa809cd9ea1a3d4ff879108b11d3a1028e9b4_sk
+    ports:
+      - "12054:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/dbsssgsg.example.com/ca:/etc/hyperledger/fabric-ca-server-config
+    networks:
+      fabric:
+        aliases:
+          - ca.dbsssgsg.example.com
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx07]
+
+  peer0-dbsssgsg:
+    container_name: peer0.dbsssgsg.example.com
+    image: hyperledger/fabric-peer:x86_64-1.0.1
+    environment:
+      - CORE_LOGGING_PEER=debug
+      - CORE_CHAINCODE_LOGGING_LEVEL=DEBUG
+      - CORE_CHAINCODE_KEEPALIVE=180
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_PEER_ID=peer0.dbsssgsg.example.com
+      - CORE_PEER_ADDRESS=peer0.dbsssgsg.example.com:7051
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=ubin_fabric
+      - CORE_PEER_LOCALMSPID=dbsssgsgMSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/crypto/peer/msp
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb-dbsssgsg:5984
+      - CORE_CHAINCODE_STARTUPTIMEOUT=600s
+      - CORE_CHAINCODE_DEPLOYTIMEOUT=600s
+      - CORE_PEER_TLS_ENABLED=false
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/crypto/peer/tls/server.key
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/crypto/peer/tls/server.crt
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/crypto/peer/tls/ca.crt
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: sh -c 'sleep 60; peer node start'
+    ports:
+      - 12051:7051
+      - 12053:7053
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./channel-artifacts/:/etc/hyperledger/configtx
+      - ./crypto-config/peerOrganizations/dbsssgsg.example.com/peers/peer0.dbsssgsg.example.com/:/etc/hyperledger/crypto/peer
+      - ./crypto-config/peerOrganizations/dbsssgsg.example.com/users:/etc/hyperledger/crypto/msp/users
+      - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/:/etc/hyperledger/crypto/orderer
+    depends_on:
+      - orderer.example.com
+      - couchdb-dbsssgsg
+    networks:
+      fabric:
+        aliases:
+          - peer0.dbsssgsg.example.com
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx07]
+
+  couchdb-dbsssgsg:
+    container_name: couchdb-dbsssgsg
+    image: hyperledger/fabric-couchdb:x86_64-1.0.1
+    ports:
+      - 10984:5984
+    environment:
+      DB_URL: http://localhost:5984/member_db
+    networks:
+      fabric:
+        aliases:
+          - couchdb-dbsssgsg
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx07]
+
+###############################################
+# HSBCSGSG organization
+###############################################
+  
+  ca-hsbcsgsg:
+    container_name: ca.hsbcsgsg.example.com
+    image: hyperledger/fabric-ca:x86_64-1.0.1
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.hsbcsgsg.example.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.hsbcsgsg.example.com-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/6baeb8b7d014ccd078c1601da7d6cfa2a5450c86568f19bda4b40d5913e230ef_sk
+      - FABRIC_CA_SERVER_TLS_ENABLED=false
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.hsbcsgsg.example.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/6baeb8b7d014ccd078c1601da7d6cfa2a5450c86568f19bda4b40d5913e230ef_sk
+    ports:
+      - "13054:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/hsbcsgsg.example.com/ca:/etc/hyperledger/fabric-ca-server-config
+    networks:
+      fabric:
+        aliases:
+          - ca.hsbcsgsg.example.com
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx08]
+
+  peer0-hsbcsgsg:
+    container_name: peer0.hsbcsgsg.example.com
+    image: hyperledger/fabric-peer:x86_64-1.0.1
+    environment:
+      - CORE_LOGGING_PEER=debug
+      - CORE_CHAINCODE_LOGGING_LEVEL=DEBUG
+      - CORE_CHAINCODE_KEEPALIVE=180
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_PEER_ID=peer0.hsbcsgsg.example.com
+      - CORE_PEER_ADDRESS=peer0.hsbcsgsg.example.com:7051
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=ubin_fabric
+      - CORE_PEER_LOCALMSPID=hsbcsgsgMSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/crypto/peer/msp
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb-hsbcsgsg:5984
+      - CORE_CHAINCODE_STARTUPTIMEOUT=600s
+      - CORE_CHAINCODE_DEPLOYTIMEOUT=600s
+      - CORE_PEER_TLS_ENABLED=false
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/crypto/peer/tls/server.key
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/crypto/peer/tls/server.crt
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/crypto/peer/tls/ca.crt
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: sh -c 'sleep 60; peer node start'
+    ports:
+      - 13051:7051
+      - 13053:7053
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./channel-artifacts/:/etc/hyperledger/configtx
+      - ./crypto-config/peerOrganizations/hsbcsgsg.example.com/peers/peer0.hsbcsgsg.example.com/:/etc/hyperledger/crypto/peer
+      - ./crypto-config/peerOrganizations/hsbcsgsg.example.com/users:/etc/hyperledger/crypto/msp/users
+      - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/:/etc/hyperledger/crypto/orderer
+    depends_on:
+      - orderer.example.com
+      - couchdb-hsbcsgsg
+    networks:
+      fabric:
+        aliases:
+          - peer0.hsbcsgsg.example.com
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx08]
+
+  couchdb-hsbcsgsg:
+    container_name: couchdb-hsbcsgsg
+    image: hyperledger/fabric-couchdb:x86_64-1.0.1
+    ports:
+      - 11984:5984
+    environment:
+      DB_URL: http://localhost:5984/member_db
+    networks:
+      fabric:
+        aliases:
+          - couchdb-hsbcsgsg
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx08]
+
+###############################################
+# MTBCSGSG organization
+###############################################
+  
+  ca-mtbcsgsg:
+    container_name: ca.mtbcsgsg.example.com
+    image: hyperledger/fabric-ca:x86_64-1.0.1
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.mtbcsgsg.example.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.mtbcsgsg.example.com-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/acab5ed2f34e40b647704977cb0b53ed1345e251cd0585d8e8b0e61060a7a0f0_sk
+      - FABRIC_CA_SERVER_TLS_ENABLED=false
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.mtbcsgsg.example.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/acab5ed2f34e40b647704977cb0b53ed1345e251cd0585d8e8b0e61060a7a0f0_sk
+    ports:
+      - "14054:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/mtbcsgsg.example.com/ca:/etc/hyperledger/fabric-ca-server-config
+    networks:
+      fabric:
+        aliases:
+          - ca.mtbcsgsg.example.com
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx09]
+
+  peer0-mtbcsgsg:
+    container_name: peer0.mtbcsgsg.example.com
+    image: hyperledger/fabric-peer:x86_64-1.0.1
+    environment:
+      - CORE_LOGGING_PEER=debug
+      - CORE_CHAINCODE_LOGGING_LEVEL=DEBUG
+      - CORE_CHAINCODE_KEEPALIVE=180
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_PEER_ID=peer0.mtbcsgsg.example.com
+      - CORE_PEER_ADDRESS=peer0.mtbcsgsg.example.com:7051
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=ubin_fabric
+      - CORE_PEER_LOCALMSPID=mtbcsgsgMSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/crypto/peer/msp
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb-mtbcsgsg:5984
+      - CORE_CHAINCODE_STARTUPTIMEOUT=600s
+      - CORE_CHAINCODE_DEPLOYTIMEOUT=600s
+      - CORE_PEER_TLS_ENABLED=false
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/crypto/peer/tls/server.key
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/crypto/peer/tls/server.crt
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/crypto/peer/tls/ca.crt
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: sh -c 'sleep 60; peer node start'
+    ports:
+      - 14051:7051
+      - 14053:7053
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./channel-artifacts/:/etc/hyperledger/configtx
+      - ./crypto-config/peerOrganizations/mtbcsgsg.example.com/peers/peer0.mtbcsgsg.example.com/:/etc/hyperledger/crypto/peer
+      - ./crypto-config/peerOrganizations/mtbcsgsg.example.com/users:/etc/hyperledger/crypto/msp/users
+      - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/:/etc/hyperledger/crypto/orderer
+    depends_on:
+      - orderer.example.com
+      - couchdb-mtbcsgsg
+    networks:
+      fabric:
+        aliases:
+          - peer0.mtbcsgsg.example.com
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx09]
+
+  couchdb-mtbcsgsg:
+    container_name: couchdb-mtbcsgsg
+    image: hyperledger/fabric-couchdb:x86_64-1.0.1
+    ports:
+      - 12984:5984
+    environment:
+      DB_URL: http://localhost:5984/member_db
+    networks:
+      fabric:
+        aliases:
+          - couchdb-mtbcsgsg
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx09]
+
+###############################################
+# OCBCSGSG organization
+###############################################
+  
+  ca-ocbcsgsg:
+    container_name: ca.ocbcsgsg.example.com
+    image: hyperledger/fabric-ca:x86_64-1.0.1
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.ocbcsgsg.example.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.ocbcsgsg.example.com-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/38be07b2f477d34a3be50ef4daccfab2161822e203f184080887488c88ad5f67_sk
+      - FABRIC_CA_SERVER_TLS_ENABLED=false
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.ocbcsgsg.example.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/38be07b2f477d34a3be50ef4daccfab2161822e203f184080887488c88ad5f67_sk
+    ports:
+      - "15054:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/ocbcsgsg.example.com/ca:/etc/hyperledger/fabric-ca-server-config
+    networks:
+      fabric:
+        aliases:
+          - ca.ocbcsgsg.example.com
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx010]
+
+  peer0-ocbcsgsg:
+    container_name: peer0.ocbcsgsg.example.com
+    image: hyperledger/fabric-peer:x86_64-1.0.1
+    environment:
+      - CORE_LOGGING_PEER=debug
+      - CORE_CHAINCODE_LOGGING_LEVEL=DEBUG
+      - CORE_CHAINCODE_KEEPALIVE=180
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_PEER_ID=peer0.ocbcsgsg.example.com
+      - CORE_PEER_ADDRESS=peer0.ocbcsgsg.example.com:7051
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=ubin_fabric
+      - CORE_PEER_LOCALMSPID=ocbcsgsgMSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/crypto/peer/msp
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb-ocbcsgsg:5984
+      - CORE_CHAINCODE_STARTUPTIMEOUT=600s
+      - CORE_CHAINCODE_DEPLOYTIMEOUT=600s
+      - CORE_PEER_TLS_ENABLED=false
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/crypto/peer/tls/server.key
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/crypto/peer/tls/server.crt
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/crypto/peer/tls/ca.crt
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: sh -c 'sleep 60; peer node start'
+    ports:
+      - 15051:7051
+      - 15053:7053
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./channel-artifacts/:/etc/hyperledger/configtx
+      - ./crypto-config/peerOrganizations/ocbcsgsg.example.com/peers/peer0.ocbcsgsg.example.com/:/etc/hyperledger/crypto/peer
+      - ./crypto-config/peerOrganizations/ocbcsgsg.example.com/users:/etc/hyperledger/crypto/msp/users
+      - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/:/etc/hyperledger/crypto/orderer
+    depends_on:
+      - orderer.example.com
+      - couchdb-ocbcsgsg
+    networks:
+      fabric:
+        aliases:
+          - peer0.ocbcsgsg.example.com
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx010]
+
+  couchdb-ocbcsgsg:
+    container_name: couchdb-ocbcsgsg
+    image: hyperledger/fabric-couchdb:x86_64-1.0.1
+    ports:
+      - 13984:5984
+    environment:
+      DB_URL: http://localhost:5984/member_db
+    networks:
+      fabric:
+        aliases:
+          - couchdb-ocbcsgsg
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx010]
+
+###############################################
+# SCBLSGSG organization
+###############################################
+  
+  ca-scblsgsg:
+    container_name: ca.scblsgsg.example.com
+    image: hyperledger/fabric-ca:x86_64-1.0.1
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.scblsgsg.example.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.scblsgsg.example.com-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/40d7f630eed5fb2c4c75603e29acc46cd9b40899b0c2b27460511d1754b0aefb_sk
+      - FABRIC_CA_SERVER_TLS_ENABLED=false
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.scblsgsg.example.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/40d7f630eed5fb2c4c75603e29acc46cd9b40899b0c2b27460511d1754b0aefb_sk
+    ports:
+      - "16054:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/scblsgsg.example.com/ca:/etc/hyperledger/fabric-ca-server-config
+    networks:
+      fabric:
+        aliases:
+          - ca.scblsgsg.example.com
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx011]
+
+  peer0-scblsgsg:
+    container_name: peer0.scblsgsg.example.com
+    image: hyperledger/fabric-peer:x86_64-1.0.1
+    environment:
+      - CORE_LOGGING_PEER=debug
+      - CORE_CHAINCODE_LOGGING_LEVEL=DEBUG
+      - CORE_CHAINCODE_KEEPALIVE=180
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_PEER_ID=peer0.scblsgsg.example.com
+      - CORE_PEER_ADDRESS=peer0.scblsgsg.example.com:7051
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=ubin_fabric
+      - CORE_PEER_LOCALMSPID=scblsgsgMSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/crypto/peer/msp
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb-scblsgsg:5984
+      - CORE_CHAINCODE_STARTUPTIMEOUT=600s
+      - CORE_CHAINCODE_DEPLOYTIMEOUT=600s
+      - CORE_PEER_TLS_ENABLED=false
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/crypto/peer/tls/server.key
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/crypto/peer/tls/server.crt
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/crypto/peer/tls/ca.crt
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: sh -c 'sleep 60; peer node start'
+    ports:
+      - 16051:7051
+      - 16053:7053
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./channel-artifacts/:/etc/hyperledger/configtx
+      - ./crypto-config/peerOrganizations/scblsgsg.example.com/peers/peer0.scblsgsg.example.com/:/etc/hyperledger/crypto/peer
+      - ./crypto-config/peerOrganizations/scblsgsg.example.com/users:/etc/hyperledger/crypto/msp/users
+      - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/:/etc/hyperledger/crypto/orderer
+    depends_on:
+      - orderer.example.com
+      - couchdb-scblsgsg
+    networks:
+      fabric:
+        aliases:
+          - peer0.scblsgsg.example.com
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx011]
+
+  couchdb-scblsgsg:
+    container_name: couchdb-scblsgsg
+    image: hyperledger/fabric-couchdb:x86_64-1.0.1
+    ports:
+      - 14984:5984
+    environment:
+      DB_URL: http://localhost:5984/member_db
+    networks:
+      fabric:
+        aliases:
+          - couchdb-scblsgsg
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx011]
+
+###############################################
+# UOBVSGSG organization
+###############################################
+  
+  ca-uobvsgsg:
+    container_name: ca.uobvsgsg.example.com
+    image: hyperledger/fabric-ca:x86_64-1.0.1
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.uobvsgsg.example.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.uobvsgsg.example.com-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/babd31bb7c710361c99dedf6e788d090567cd02d3bbae2a2a73ccd80973c3227_sk
+      - FABRIC_CA_SERVER_TLS_ENABLED=false
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.uobvsgsg.example.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/babd31bb7c710361c99dedf6e788d090567cd02d3bbae2a2a73ccd80973c3227_sk
+    ports:
+      - "17054:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/uobvsgsg.example.com/ca:/etc/hyperledger/fabric-ca-server-config
+    networks:
+      fabric:
+        aliases:
+          - ca.uobvsgsg.example.com
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx012]
+
+  peer0-uobvsgsg:
+    container_name: peer0.uobvsgsg.example.com
+    image: hyperledger/fabric-peer:x86_64-1.0.1
+    environment:
+      - CORE_LOGGING_PEER=debug
+      - CORE_CHAINCODE_LOGGING_LEVEL=DEBUG
+      - CORE_CHAINCODE_KEEPALIVE=180
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_PEER_ID=peer0.uobvsgsg.example.com
+      - CORE_PEER_ADDRESS=peer0.uobvsgsg.example.com:7051
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=ubin_fabric
+      - CORE_PEER_LOCALMSPID=uobvsgsgMSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/crypto/peer/msp
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb-uobvsgsg:5984
+      - CORE_CHAINCODE_STARTUPTIMEOUT=600s
+      - CORE_CHAINCODE_DEPLOYTIMEOUT=600s
+      - CORE_PEER_TLS_ENABLED=false
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/crypto/peer/tls/server.key
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/crypto/peer/tls/server.crt
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/crypto/peer/tls/ca.crt
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: sh -c 'sleep 60; peer node start'
+    ports:
+      - 17051:7051
+      - 17053:7053
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./channel-artifacts/:/etc/hyperledger/configtx
+      - ./crypto-config/peerOrganizations/uobvsgsg.example.com/peers/peer0.uobvsgsg.example.com/:/etc/hyperledger/crypto/peer
+      - ./crypto-config/peerOrganizations/uobvsgsg.example.com/users:/etc/hyperledger/crypto/msp/users
+      - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/:/etc/hyperledger/crypto/orderer
+    depends_on:
+      - orderer.example.com
+      - couchdb-uobvsgsg
+    networks:
+      fabric:
+        aliases:
+          - peer0.uobvsgsg.example.com
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx012]
+
+  couchdb-uobvsgsg:
+    container_name: couchdb-uobvsgsg
+    image: hyperledger/fabric-couchdb:x86_64-1.0.1
+    ports:
+      - 15984:5984
+    environment:
+      DB_URL: http://localhost:5984/member_db
+    networks:
+      fabric:
+        aliases:
+          - couchdb-uobvsgsg
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx012]
+
+###############################################
+# XSIMSGSG organization
+###############################################
+  
+  ca-xsimsgsg:
+    container_name: ca.xsimsgsg.example.com
+    image: hyperledger/fabric-ca:x86_64-1.0.1
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.xsimsgsg.example.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.xsimsgsg.example.com-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/e79e7339fa6bf6c70870dee9d58eb02c5595cbcd324c437bb5fa51ccc38f9bbf_sk
+      - FABRIC_CA_SERVER_TLS_ENABLED=false
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.xsimsgsg.example.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/e79e7339fa6bf6c70870dee9d58eb02c5595cbcd324c437bb5fa51ccc38f9bbf_sk
+    ports:
+      - "18054:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/xsimsgsg.example.com/ca:/etc/hyperledger/fabric-ca-server-config
+    networks:
+      fabric:
+        aliases:
+          - ca.xsimsgsg.example.com
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx013]
+
+  peer0-xsimsgsg:
+    container_name: peer0.xsimsgsg.example.com
+    image: hyperledger/fabric-peer:x86_64-1.0.1
+    environment:
+      - CORE_LOGGING_PEER=debug
+      - CORE_CHAINCODE_LOGGING_LEVEL=DEBUG
+      - CORE_CHAINCODE_KEEPALIVE=180
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_PEER_ID=peer0.xsimsgsg.example.com
+      - CORE_PEER_ADDRESS=peer0.xsimsgsg.example.com:7051
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=ubin_fabric
+      - CORE_PEER_LOCALMSPID=xsimsgsgMSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/crypto/peer/msp
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb-xsimsgsg:5984
+      - CORE_CHAINCODE_STARTUPTIMEOUT=600s
+      - CORE_CHAINCODE_DEPLOYTIMEOUT=600s
+      - CORE_PEER_TLS_ENABLED=false
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/crypto/peer/tls/server.key
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/crypto/peer/tls/server.crt
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/crypto/peer/tls/ca.crt
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: sh -c 'sleep 60; peer node start'
+    ports:
+      - 18051:7051
+      - 18053:7053
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./channel-artifacts/:/etc/hyperledger/configtx
+      - ./crypto-config/peerOrganizations/xsimsgsg.example.com/peers/peer0.xsimsgsg.example.com/:/etc/hyperledger/crypto/peer
+      - ./crypto-config/peerOrganizations/xsimsgsg.example.com/users:/etc/hyperledger/crypto/msp/users
+      - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/:/etc/hyperledger/crypto/orderer
+    depends_on:
+      - orderer.example.com
+      - couchdb-xsimsgsg
+    networks:
+      fabric:
+        aliases:
+          - peer0.xsimsgsg.example.com
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx013]
+
+  couchdb-xsimsgsg:
+    container_name: couchdb-xsimsgsg
+    image: hyperledger/fabric-couchdb:x86_64-1.0.1
+    ports:
+      - 16984:5984
+    environment:
+      DB_URL: http://localhost:5984/member_db
+    networks:
+      fabric:
+        aliases:
+          - couchdb-xsimsgsg
+    deploy:
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+      placement:
+        constraints: [node.hostname == FabricNx013]
+
+networks:
+  fabric:
+    driver: overlay
+    attachable: true

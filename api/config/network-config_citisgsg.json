@@ -1,0 +1,160 @@
+{
+    "networkConfig": {
+        "orderer": {
+            "url": "grpc://FabricNx01:7050",
+            "server-hostname": "orderer.example.com",
+            "tls_cacerts": "../../../network/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt"
+        },
+        "org3": {
+            "bic": "CITISGSG",
+            "mspid": "citisgsgMSP",
+            "ca": "http://FabricNx05:10054",
+            "peer0": {
+                "requests": "grpc://FabricNx05:10051",
+                "events": "grpc://FabricNx05:10053",
+                "server-hostname": "peer0.citisgsg.example.com",
+                "tls_cacerts": "../../../network/crypto-config/peerOrganizations/citisgsg.example.com/peers/peer0.citisgsg.example.com/tls/ca.crt"
+            },
+            "admin": {
+                "key": "../../../network/crypto-config/peerOrganizations/citisgsg.example.com/users/Admin@citisgsg.example.com/msp/keystore",
+                "cert": "../../../network/crypto-config/peerOrganizations/citisgsg.example.com/users/Admin@citisgsg.example.com/msp/signcerts"
+            },
+            "orgPeers": [
+                "FabricNx05:10051"
+            ],
+            "orgChannels": {
+                "org1": "bofasg2xcitisgsgchannel",
+                "org2": "chassgsgcitisgsgchannel",
+                "org4": "citisgsgcsfbsgsxchannel",
+                "org5": "citisgsgdbsssgsgchannel",
+                "org6": "citisgsghsbcsgsgchannel",
+                "org7": "citisgsgmtbcsgsgchannel",
+                "org8": "citisgsgocbcsgsgchannel",
+                "org9": "citisgsgscblsgsgchannel",
+                "org10": "citisgsguobvsgsgchannel",
+                "org11": "citisgsgxsimsgsgchannel"
+            }
+        },
+        "org0": {
+            "bic": "MASGSGSG",
+            "mspid": "masgsgsgMSP",
+            "ca": "http://FabricNx02:7054",
+            "peer0": {
+                "requests": "grpc://FabricNx02:7051",
+                "events": "grpc://FabricNx02:7053",
+                "server-hostname": "peer0.masgsgsg.example.com",
+                "tls_cacerts": "../../../network/crypto-config/peerOrganizations/masgsgsg.example.com/peers/peer0.masgsgsg.example.com/tls/ca.crt"
+            }
+        },
+        "org1": {
+            "bic": "BOFASG2X",
+            "mspid": "bofasg2xMSP",
+            "ca": "http://FabricNx03:8054",
+            "peer0": {
+                "requests": "grpc://FabricNx03:8051",
+                "events": "grpc://FabricNx03:8053",
+                "server-hostname": "peer0.bofasg2x.example.com",
+                "tls_cacerts": "../../../network/crypto-config/peerOrganizations/bofasg2x.example.com/peers/peer0.bofasg2x.example.com/tls/ca.crt"
+            }
+        },
+        "org2": {
+            "bic": "CHASSGSG",
+            "mspid": "chassgsgMSP",
+            "ca": "http://FabricNx04:9054",
+            "peer0": {
+                "requests": "grpc://FabricNx04:9051",
+                "events": "grpc://FabricNx04:9053",
+                "server-hostname": "peer0.chassgsg.example.com",
+                "tls_cacerts": "../../../network/crypto-config/peerOrganizations/chassgsg.example.com/peers/peer0.chassgsg.example.com/tls/ca.crt"
+            }
+        },
+        "org4": {
+            "bic": "CSFBSGSX",
+            "mspid": "csfbsgsxMSP",
+            "ca": "http://FabricNx06:11054",
+            "peer0": {
+                "requests": "grpc://FabricNx06:11051",
+                "events": "grpc://FabricNx06:11053",
+                "server-hostname": "peer0.csfbsgsx.example.com",
+                "tls_cacerts": "../../../network/crypto-config/peerOrganizations/csfbsgsx.example.com/peers/peer0.csfbsgsx.example.com/tls/ca.crt"
+            }
+        },
+        "org5": {
+            "bic": "DBSSSGSG",
+            "mspid": "dbsssgsgMSP",
+            "ca": "http://FabricNx07:12054",
+            "peer0": {
+                "requests": "grpc://FabricNx07:12051",
+                "events": "grpc://FabricNx07:12053",
+                "server-hostname": "peer0.dbsssgsg.example.com",
+                "tls_cacerts": "../../../network/crypto-config/peerOrganizations/dbsssgsg.example.com/peers/peer0.dbsssgsg.example.com/tls/ca.crt"
+            }
+        },
+        "org6": {
+            "bic": "HSBCSGSG",
+            "mspid": "hsbcsgsgMSP",
+            "ca": "http://FabricNx08:13054",
+            "peer0": {
+                "requests": "grpc://FabricNx08:13051",
+                "events": "grpc://FabricNx08:13053",
+                "server-hostname": "peer0.hsbcsgsg.example.com",
+                "tls_cacerts": "../../../network/crypto-config/peerOrganizations/hsbcsgsg.example.com/peers/peer0.hsbcsgsg.example.com/tls/ca.crt"
+            }
+        },
+        "org7": {
+            "bic": "MTBCSGSG",
+            "mspid": "mtbcsgsgMSP",
+            "ca": "http://FabricNx09:14054",
+            "peer0": {
+                "requests": "grpc://FabricNx09:14051",
+                "events": "grpc://FabricNx09:14053",
+                "server-hostname": "peer0.mtbcsgsg.example.com",
+                "tls_cacerts": "../../../network/crypto-config/peerOrganizations/mtbcsgsg.example.com/peers/peer0.mtbcsgsg.example.com/tls/ca.crt"
+            }
+        },
+        "org8": {
+            "bic": "OCBCSGSG",
+            "mspid": "ocbcsgsgMSP",
+            "ca": "http://FabricNx010:15054",
+            "peer0": {
+                "requests": "grpc://FabricNx010:15051",
+                "events": "grpc://FabricNx010:15053",
+                "server-hostname": "peer0.ocbcsgsg.example.com",
+                "tls_cacerts": "../../../network/crypto-config/peerOrganizations/ocbcsgsg.example.com/peers/peer0.ocbcsgsg.example.com/tls/ca.crt"
+            }
+        },
+        "org9": {
+            "bic": "SCBLSGSG",
+            "mspid": "scblsgsgMSP",
+            "ca": "http://FabricNx011:16054",
+            "peer0": {
+                "requests": "grpc://FabricNx011:16051",
+                "events": "grpc://FabricNx011:16053",
+                "server-hostname": "peer0.scblsgsg.example.com",
+                "tls_cacerts": "../../../network/crypto-config/peerOrganizations/scblsgsg.example.com/peers/peer0.scblsgsg.example.com/tls/ca.crt"
+            }
+        },
+        "org10": {
+            "bic": "UOBVSGSG",
+            "mspid": "uobvsgsgMSP",
+            "ca": "http://FabricNx012:17054",
+            "peer0": {
+                "requests": "grpc://FabricNx012:17051",
+                "events": "grpc://FabricNx012:17053",
+                "server-hostname": "peer0.uobvsgsg.example.com",
+                "tls_cacerts": "../../../network/crypto-config/peerOrganizations/uobvsgsg.example.com/peers/peer0.uobvsgsg.example.com/tls/ca.crt"
+            }
+        },
+        "org11": {
+            "bic": "XSIMSGSG",
+            "mspid": "xsimsgsgMSP",
+            "ca": "http://FabricNx013:18054",
+            "peer0": {
+                "requests": "grpc://FabricNx013:18051",
+                "events": "grpc://FabricNx013:18053",
+                "server-hostname": "peer0.xsimsgsg.example.com",
+                "tls_cacerts": "../../../network/crypto-config/peerOrganizations/xsimsgsg.example.com/peers/peer0.xsimsgsg.example.com/tls/ca.crt"
+            }
+        }
+    }
+}

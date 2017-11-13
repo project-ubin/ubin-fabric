@@ -1,0 +1,22 @@
+{
+	"host":"localhost",
+	"port":"8080", 
+	"keyValueStore":"/tmp/fabric-client-kvs",
+	"eventWaitTime":"60000",
+	"orderer":"grpc://FabricNx01:7050",
+	"users":[
+	{
+		"username":"admin",
+		"secret":"adminpw"
+	}
+	],
+	"default": {
+		"enqueue" : 0,
+		"currency" : "SGD"
+	},
+	"nettingurl" : "http://localhost:8080/api/netting/status",
+	"joinNettingUrl" : "http://localhost:8080/api/netting/",
+	"settleNettingUrl" : "http://localhost:8080/api/netting/settle",
+	"toggleNettingUrl" : "http://localhost:8080/api/netting/toggle",
+	"mepsurl":"http://localhost:8090/meps/redeem"
+}

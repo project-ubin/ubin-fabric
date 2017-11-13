@@ -1,0 +1,35 @@
+{
+  "name": "ubin-fabric-api",
+  "version": "1.0.0",
+  "description": "API layer for the ubin hyperledger project",
+  "main": "app.js",
+  "keywords": [],
+  "engines": {
+    "node": ">=6.9.5",
+    "npm": ">=3.10.10"
+  },
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "author": "Accenture",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "async": "^2.5.0",
+    "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.3",
+    "express": "^4.15.2",
+    "express-session": "^1.15.2",
+    "fabric-ca-client": "^1.0.0",
+    "fabric-client": "^1.0.0",
+    "fs-extra": "^2.0.0",
+    "log4js": "^0.6.38",
+    "nodemon": "^1.9.2",
+    "request": "^2.83.0",
+    "sleep": "^5.1.1"
+  },
+  "devDependencies": {
+    "response-time": "^2.3.2",
+    "should": "^13.1.0"
+  }
+}

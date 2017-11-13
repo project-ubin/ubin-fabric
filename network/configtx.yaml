@@ -1,0 +1,688 @@
+################################################################################
+#
+#   Profile
+#
+#   - Different configuration profiles may be encoded here to be specified
+#   as parameters to the configtxgen tool
+#
+################################################################################
+Profiles:
+
+    OrdererGenesis:
+        Orderer:
+            <<: *OrdererDefaults
+            Organizations:
+                - *OrdererOrg
+        Consortiums:
+            RTGSConsortium:
+                Organizations:
+                    - *masgsgsg
+                    - *bofasg2x
+                    - *chassgsg
+                    - *citisgsg
+                    - *csfbsgsx
+                    - *dbsssgsg
+                    - *hsbcsgsg
+                    - *mtbcsgsg
+                    - *ocbcsgsg
+                    - *scblsgsg
+                    - *uobvsgsg
+                    - *xsimsgsg
+    nettingChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *bofasg2x
+                - *chassgsg
+                - *citisgsg
+                - *csfbsgsx
+                - *dbsssgsg
+                - *hsbcsgsg
+                - *mtbcsgsg
+                - *ocbcsgsg
+                - *scblsgsg
+                - *uobvsgsg
+                - *xsimsgsg
+    fundingChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *bofasg2x
+                - *chassgsg
+                - *citisgsg
+                - *csfbsgsx
+                - *dbsssgsg
+                - *hsbcsgsg
+                - *mtbcsgsg
+                - *ocbcsgsg
+                - *scblsgsg
+                - *uobvsgsg
+                - *xsimsgsg
+    bofasg2xchassgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *bofasg2x
+                - *chassgsg
+    bofasg2xcitisgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *bofasg2x
+                - *citisgsg
+    bofasg2xcsfbsgsxChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *bofasg2x
+                - *csfbsgsx
+    bofasg2xdbsssgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *bofasg2x
+                - *dbsssgsg
+    bofasg2xhsbcsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *bofasg2x
+                - *hsbcsgsg
+    bofasg2xmtbcsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *bofasg2x
+                - *mtbcsgsg
+    bofasg2xocbcsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *bofasg2x
+                - *ocbcsgsg
+    bofasg2xscblsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *bofasg2x
+                - *scblsgsg
+    bofasg2xuobvsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *bofasg2x
+                - *uobvsgsg
+    bofasg2xxsimsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *bofasg2x
+                - *xsimsgsg
+    chassgsgcitisgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *chassgsg
+                - *citisgsg
+    chassgsgcsfbsgsxChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *chassgsg
+                - *csfbsgsx
+    chassgsgdbsssgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *chassgsg
+                - *dbsssgsg
+    chassgsghsbcsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *chassgsg
+                - *hsbcsgsg
+    chassgsgmtbcsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *chassgsg
+                - *mtbcsgsg
+    chassgsgocbcsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *chassgsg
+                - *ocbcsgsg
+    chassgsgscblsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *chassgsg
+                - *scblsgsg
+    chassgsguobvsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *chassgsg
+                - *uobvsgsg
+    chassgsgxsimsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *chassgsg
+                - *xsimsgsg
+    citisgsgcsfbsgsxChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *citisgsg
+                - *csfbsgsx
+    citisgsgdbsssgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *citisgsg
+                - *dbsssgsg
+    citisgsghsbcsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *citisgsg
+                - *hsbcsgsg
+    citisgsgmtbcsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *citisgsg
+                - *mtbcsgsg
+    citisgsgocbcsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *citisgsg
+                - *ocbcsgsg
+    citisgsgscblsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *citisgsg
+                - *scblsgsg
+    citisgsguobvsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *citisgsg
+                - *uobvsgsg
+    citisgsgxsimsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *citisgsg
+                - *xsimsgsg
+    csfbsgsxdbsssgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *csfbsgsx
+                - *dbsssgsg
+    csfbsgsxhsbcsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *csfbsgsx
+                - *hsbcsgsg
+    csfbsgsxmtbcsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *csfbsgsx
+                - *mtbcsgsg
+    csfbsgsxocbcsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *csfbsgsx
+                - *ocbcsgsg
+    csfbsgsxscblsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *csfbsgsx
+                - *scblsgsg
+    csfbsgsxuobvsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *csfbsgsx
+                - *uobvsgsg
+    csfbsgsxxsimsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *csfbsgsx
+                - *xsimsgsg
+    dbsssgsghsbcsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *dbsssgsg
+                - *hsbcsgsg
+    dbsssgsgmtbcsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *dbsssgsg
+                - *mtbcsgsg
+    dbsssgsgocbcsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *dbsssgsg
+                - *ocbcsgsg
+    dbsssgsgscblsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *dbsssgsg
+                - *scblsgsg
+    dbsssgsguobvsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *dbsssgsg
+                - *uobvsgsg
+    dbsssgsgxsimsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *dbsssgsg
+                - *xsimsgsg
+    hsbcsgsgmtbcsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *hsbcsgsg
+                - *mtbcsgsg
+    hsbcsgsgocbcsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *hsbcsgsg
+                - *ocbcsgsg
+    hsbcsgsgscblsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *hsbcsgsg
+                - *scblsgsg
+    hsbcsgsguobvsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *hsbcsgsg
+                - *uobvsgsg
+    hsbcsgsgxsimsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *hsbcsgsg
+                - *xsimsgsg
+    mtbcsgsgocbcsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *mtbcsgsg
+                - *ocbcsgsg
+    mtbcsgsgscblsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *mtbcsgsg
+                - *scblsgsg
+    mtbcsgsguobvsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *mtbcsgsg
+                - *uobvsgsg
+    mtbcsgsgxsimsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *mtbcsgsg
+                - *xsimsgsg
+    ocbcsgsgscblsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *ocbcsgsg
+                - *scblsgsg
+    ocbcsgsguobvsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *ocbcsgsg
+                - *uobvsgsg
+    ocbcsgsgxsimsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *ocbcsgsg
+                - *xsimsgsg
+    scblsgsguobvsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *scblsgsg
+                - *uobvsgsg
+    scblsgsgxsimsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *scblsgsg
+                - *xsimsgsg
+    uobvsgsgxsimsgsgChannel:
+        Consortium: RTGSConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *masgsgsg
+                - *uobvsgsg
+                - *xsimsgsg
+
+################################################################################
+#
+#   Section: Organizations
+#
+#   - This section defines the different organizational identities which will
+#   be referenced later in the configuration.
+#
+################################################################################
+Organizations:
+
+    - &OrdererOrg
+        Name: OrdererOrg
+        ID: OrdererMSP
+        MSPDir: crypto-config/ordererOrganizations/example.com/msp
+        AdminPrincipal: Role.MEMBER
+    
+    - &masgsgsg
+        Name: masgsgsg
+        ID: masgsgsgMSP
+        MSPDir: crypto-config/peerOrganizations/masgsgsg.example.com/msp
+        AdminPrincipal: Role.MEMBER
+        AnchorPeers:
+            - Host: peer0.masgsgsg.example.com
+              Port: 7051
+
+    - &bofasg2x
+        Name: bofasg2x
+        ID: bofasg2xMSP
+        MSPDir: crypto-config/peerOrganizations/bofasg2x.example.com/msp
+        AdminPrincipal: Role.MEMBER
+        AnchorPeers:
+            - Host: peer0.bofasg2x.example.com
+              Port: 7051
+
+    - &chassgsg
+        Name: chassgsg
+        ID: chassgsgMSP
+        MSPDir: crypto-config/peerOrganizations/chassgsg.example.com/msp
+        AdminPrincipal: Role.MEMBER
+        AnchorPeers:
+            - Host: peer0.chassgsg.example.com
+              Port: 7051
+
+    - &citisgsg
+        Name: citisgsg
+        ID: citisgsgMSP
+        MSPDir: crypto-config/peerOrganizations/citisgsg.example.com/msp
+        AdminPrincipal: Role.MEMBER
+        AnchorPeers:
+            - Host: peer0.citisgsg.example.com
+              Port: 7051
+
+    - &csfbsgsx
+        Name: csfbsgsx
+        ID: csfbsgsxMSP
+        MSPDir: crypto-config/peerOrganizations/csfbsgsx.example.com/msp
+        AdminPrincipal: Role.MEMBER
+        AnchorPeers:
+            - Host: peer0.csfbsgsx.example.com
+              Port: 7051
+
+    - &dbsssgsg
+        Name: dbsssgsg
+        ID: dbsssgsgMSP
+        MSPDir: crypto-config/peerOrganizations/dbsssgsg.example.com/msp
+        AdminPrincipal: Role.MEMBER
+        AnchorPeers:
+            - Host: peer0.dbsssgsg.example.com
+              Port: 7051
+
+    - &hsbcsgsg
+        Name: hsbcsgsg
+        ID: hsbcsgsgMSP
+        MSPDir: crypto-config/peerOrganizations/hsbcsgsg.example.com/msp
+        AdminPrincipal: Role.MEMBER
+        AnchorPeers:
+            - Host: peer0.hsbcsgsg.example.com
+              Port: 7051
+
+    - &mtbcsgsg
+        Name: mtbcsgsg
+        ID: mtbcsgsgMSP
+        MSPDir: crypto-config/peerOrganizations/mtbcsgsg.example.com/msp
+        AdminPrincipal: Role.MEMBER
+        AnchorPeers:
+            - Host: peer0.mtbcsgsg.example.com
+              Port: 7051
+
+    - &ocbcsgsg
+        Name: ocbcsgsg
+        ID: ocbcsgsgMSP
+        MSPDir: crypto-config/peerOrganizations/ocbcsgsg.example.com/msp
+        AdminPrincipal: Role.MEMBER
+        AnchorPeers:
+            - Host: peer0.ocbcsgsg.example.com
+              Port: 7051
+
+    - &scblsgsg
+        Name: scblsgsg
+        ID: scblsgsgMSP
+        MSPDir: crypto-config/peerOrganizations/scblsgsg.example.com/msp
+        AdminPrincipal: Role.MEMBER
+        AnchorPeers:
+            - Host: peer0.scblsgsg.example.com
+              Port: 7051
+
+    - &uobvsgsg
+        Name: uobvsgsg
+        ID: uobvsgsgMSP
+        MSPDir: crypto-config/peerOrganizations/uobvsgsg.example.com/msp
+        AdminPrincipal: Role.MEMBER
+        AnchorPeers:
+            - Host: peer0.uobvsgsg.example.com
+              Port: 7051
+
+    - &xsimsgsg
+        Name: xsimsgsg
+        ID: xsimsgsgMSP
+        MSPDir: crypto-config/peerOrganizations/xsimsgsg.example.com/msp
+        AdminPrincipal: Role.MEMBER
+        AnchorPeers:
+            - Host: peer0.xsimsgsg.example.com
+              Port: 7051
+
+################################################################################
+#
+#   SECTION: Orderer
+#
+#   - This section defines the values to encode into a config transaction or
+#   genesis block for orderer related parameters
+#
+################################################################################
+Orderer: &OrdererDefaults
+
+    # Orderer Type: The orderer implementation to start
+    # Available types are "solo" and "kafka"
+    OrdererType: solo
+
+    Addresses:
+        - orderer.example.com:7050
+
+    # Batch Timeout: The amount of time to wait before creating a batch
+    BatchTimeout: 2s
+
+    # Batch Size: Controls the number of messages batched into a block
+    BatchSize:
+
+        # Max Message Count: The maximum number of messages to permit in a batch
+        MaxMessageCount: 10
+
+        # Absolute Max Bytes: The absolute maximum number of bytes allowed for
+        # the serialized messages in a batch.
+        AbsoluteMaxBytes: 98 MB
+
+        # Preferred Max Bytes: The preferred maximum number of bytes allowed for
+        # the serialized messages in a batch. A message larger than the preferred
+        # max bytes will result in a batch larger than preferred max bytes.
+        PreferredMaxBytes: 512 KB
+
+    Kafka:
+        # Brokers: A list of Kafka brokers to which the orderer connects
+        # NOTE: Use IP:port notation
+        Brokers:
+            - 127.0.0.1:9092
+
+    # Organizations is the list of orgs which are defined as participants on
+    # the orderer side of the network
+    Organizations:
+
+################################################################################
+#
+#   SECTION: Application
+#
+#   - This section defines the values to encode into a config transaction or
+#   genesis block for application related parameters
+#
+################################################################################
+Application: &ApplicationDefaults
+
+    # Organizations is the list of orgs which are defined as participants on
+    # the application side of the network
+    Organizations:
+

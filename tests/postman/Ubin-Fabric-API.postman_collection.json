@@ -1,0 +1,708 @@
+{
+	"info": {
+		"name": "Ubin-Fabric-API",
+		"_postman_id": "6742c90e-6f25-fb34-8231-fb555b2f6994",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Bank",
+			"description": "",
+			"item": [
+				{
+					"name": "[MAS] All Bank Balances",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/bank/balance/all",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"bank",
+								"balance",
+								"all"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Bank Info",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/bank/info",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"bank",
+								"info"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Bank Counterparties",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/bank/counterparties",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"bank",
+								"counterparties"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Transaction History",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/bank/transactions",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"bank",
+								"transactions"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "[MAS] Unfreeze Payment Instructions",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/bank/unfreeze/all",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"bank",
+								"unfreeze",
+								"all"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Fund",
+			"description": "",
+			"item": [
+				{
+					"name": "[MAS] Pledge",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"receiver\" : \"{{mufg}}\",\n\t\"channel\" : \"csfbsgsxmtbcsgsgchannel\",\n\t\"amount\": 100000.0\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/fund/pledge",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"fund",
+								"pledge"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "[MAS] Redeem",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"sender\" : \"{{cs}}\",\n\t\"channel\" : \"csfbsgsxmtbcsgsgchannel\",\n\t\"amount\": 9000\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/fund/redeem",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"fund",
+								"redeem"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Transfer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"receiver\": \"{{mufg}}\",\n\t\"priority\": 0,\n\t\"transactionAmount\": 200.0,\n\t\"currency\": \"SGD\",\n\t\"enqueue\": \"true\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/fund/transfer",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"fund",
+								"transfer"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Cross-channel fund movement",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\t{\n\t\t\"fromChannel\" : \"csfbsgsxmtbcsgsgchannel\",\n\t\t\"toChannel\" : \"csfbsgsxuobvsgsgchannel\",\n\t\t\"amount\": 50\n\t}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/fund/interchannel/transfer",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"fund",
+								"interchannel",
+								"transfer"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Cross-channel fund movement suggestion",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "strategy",
+								"value": "\"worse-fit\""
+							},
+							{
+								"key": "showtransactions",
+								"value": "true"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/fund/suggest",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"fund",
+								"suggest"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Queue",
+			"description": "",
+			"item": [
+				{
+					"name": "Queue All",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"channelName\": \"skfjlsjflsvv\",\n\t\"enqueue\": 1,\n\t\"priority\": 1,\n\t\"receiver\": \"OCBCSGSG\",\n\t\"transactionAmount\": 200,\n\t\"currency\": \"SGD\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/queue",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"queue"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Queue Out",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"channelName\": \"skfjlsjflsvv\",\n\t\"enqueue\": 1,\n\t\"priority\": 1,\n\t\"receiver\": \"OCBCSGSG\",\n\t\"transactionAmount\": 200,\n\t\"currency\": \"SGD\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/queue/out",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"queue",
+								"out"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Queue In",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"channelName\": \"skfjlsjflsvv\",\n\t\"enqueue\": 1,\n\t\"priority\": 1,\n\t\"receiver\": \"OCBCSGSG\",\n\t\"transactionAmount\": 200,\n\t\"currency\": \"SGD\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/queue/in",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"queue",
+								"in"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Queue Priority",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\n\t \t\"transId\": \"64f10796c54c082066236ea5455f03abda93771ab0bfcc94ebf27bc030986b15\",\n\t \t\"priority\": 1,\n\t    \"receiver\": \"{{scb}}\"\n\t}\n]"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/queue/priority",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"queue",
+								"priority"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Queue Status",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[ \n\t{\n    \"receiver\": \"{{dbs}}\",\n    \"transId\" : \"8350a5e6a6d33516bfc6e9b5f01d276ac5b95d19fd17ea7e15fe0239f5a0e48c\"\n\t} \n]"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/queue/status",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"queue",
+								"status"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Queue Cancel",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\n    \t\"receiver\": \"{{hsbc}}\",\n    \t\"transId\" : \"cf2f6efa63c33079673ce3ee615df57c889910c211e4e1e9eeb731b0b8502495\"\n\t}\n]"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/queue/cancel",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"queue",
+								"cancel"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Queue Settle",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"channelName\": \"skfjlsjflsvv\",\n\t\"enqueue\": 1,\n\t\"priority\": 1,\n\t\"receiver\": \"OCBCSGSG\",\n\t\"transactionAmount\": 200,\n\t\"currency\": \"SGD\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/queue/settle/{{cs}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"queue",
+								"settle",
+								"{{cs}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Netting",
+			"description": "",
+			"item": [
+				{
+					"name": "Netting Status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/netting/status",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"netting",
+								"status"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Execute Multilateral Netting",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/netting",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"netting"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "[MAS] Multilateral Netting Settlement",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/netting/settle",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"netting",
+								"settle"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Toggle Multilateral Netting",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "time",
+								"value": "30000"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"sender\" : \"OCBCSGSG\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/netting/toggle",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"netting",
+								"toggle"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Miscellaneous",
+			"description": "",
+			"item": [
+				{
+					"name": "Reset All Data",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "all",
+								"value": "true"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/resetdata",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"resetdata"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
