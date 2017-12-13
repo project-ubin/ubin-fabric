@@ -1,14 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 echo "==============================================="
 echo " Installing Pre-Requisites"
 echo "==============================================="
 echo 
 sudo apt-get update
-# sudo apt-get -y install bison
-# sudo apt-get -y install python-software-properties
 sudo apt-get -y install build-essential
 sudo apt-get -y install jq
+sudo apt-get -y install curl
 sudo apt-get -y install docker-compose
 sudo apt-get -y install python-pip
 
@@ -20,10 +19,9 @@ echo "==============================================="
 echo 
 wget https://storage.googleapis.com/golang/go1.7.6.linux-amd64.tar.gz
 sudo tar -zxvf  go1.7.6.linux-amd64.tar.gz -C /usr/local/
-mkdir $HOME/go
+mkdir $HOME/src
 echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
 echo 'export GOPATH=$HOME' >> ~/.bashrc
-# echo 'export PATH=$PATH:$GOPATH/bin' >> ~/.bashrc
 source ~/.bashrc
 
 

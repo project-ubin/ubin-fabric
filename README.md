@@ -27,16 +27,15 @@ This project is built and tested on the following:
 - NPM: 3.10.10
 - PM2: 2.7.2
 
-To install all prerequisites, download and run the [setup script](fabric-setup.sh) provided in the root folder of this repository 
+To install all prerequisites, download and run the [setup script](fabric-setup.sh) provided in the root folder of this repository. Reboot the VM(s) after installation to ensure that all changes have taken effect.
     
-
 
 ### Installation
 
-1. Clone the repository into `$GOPATH/src`
+1. Clone or download the repository into `$GOPATH/src`
     ```
     cd $GOPATH/src
-    git clone http://gitlabnx01.southeastasia.cloudapp.azure.com/dev-fabric/ubin-fabric.git
+    git clone https://github.com/project-ubin/ubin-fabric.git
     ```
 
 2. Install required NodeJS packages
@@ -79,12 +78,12 @@ To install all prerequisites, download and run the [setup script](fabric-setup.s
 
 2. Add the following line to the end of the file to trigger a 'keep-alive' transaction to all chaincode containers every 10 minutes:
     ```
-    */10 * * * *  [ -f /var/tmp/croncontrol/fabric_ping ] || curl -X GET http://localhost:8080/api/ping -H 'content-type: application/json' -o /home/azureuser/ping.log
+    */10 * * * *  [ -f /var/tmp/croncontrol/fabric_ping ] || curl -X GET http://localhost:8080/api/ping -H 'content-type: application/json' -o $HOME/ping.log
     ```
 
 3. On the MAS virtual machine, add the following line to enable a daily data reset at 2am:
     ```
-    0 2 * * * curl -X PATCH http://localhost:8080/api/resetdata -H 'all: true' -H 'content-type: application/json' -o /home/azureuser/reset.log
+    0 2 * * * curl -X PATCH http://localhost:8080/api/resetdata -H 'all: true' -H 'content-type: application/json' -o $HOME/reset.log
     ```
 
 
@@ -158,12 +157,12 @@ cd $GOPATH/src/ubin-fabric/network
 
 ### Initialising the API Layer and Chaincodes
 
-1. Initialise the API and install all chaincodes on the 11 bank nodes
-    ```
-    ./init.sh
-    ```
+Initialise the API and install all chaincodes on the 11 bank nodes
+```
+./init.sh
+```
 
-    Once complete, run the same command on the central bank node to initialise the API, install and instantiate the chaincodes on all channels
+Once complete, run the same command on the central bank node to initialise the API, install and instantiate the chaincodes on all channels
 
 
 ## C. Chaincode Upgrade
@@ -221,11 +220,11 @@ $ ./gradlew build
 1\. Update the `ubin-ext-service/application.properties` with Fabric configuration:
 
 ```sh
-    PledgeURI=http://fabricnx02.southeastasia.cloudapp.azure.com:9001/api/fund/pledge
-    RedeemURI=http://fabricnx02.southeastasia.cloudapp.azure.com:9001/api/fund/redeem
+    PledgeURI=http://<host>:9001/api/fund/pledge
+    RedeemURI=http://<host>:9001/api/fund/redeem
     Dlt=Fabric
 ```
-    Note: `fabric02.southeastasia.cloudapp.azure.com` is the MAS VM.
+    Note: Replace <host> with Central Bank (MAS) host/domain name.
 
 2\. Copy built JAR artifact and properties files to the Central Bank VM
 ```sh
@@ -241,13 +240,13 @@ $ java -jar -Dspring.config.location=application.properties -Dserver.port=9001 M
 
 ## E. Network Teardown
 
-1. Bring down all docker containers, remove docker images, clean up enrollment materials and kill the API
-    ```
-    cd $GOPATH/src/ubin-fabric/network
-    ./network-down.sh
-    ```
+Bring down all docker containers, remove docker images, clean up enrollment materials and kill the API
+```
+cd $GOPATH/src/ubin-fabric/network
+./network-down.sh
+```
 
-## Test Scripts
+## F. Test Scripts
 
 [Postman](https://www.getpostman.com/) is the main testing tool used for this prototype. The Postman collection and environments are located in the [tests](tests/postman) folder in this repository. The API definitions can be found in the [Technical Report repository](https://github.com/project-ubin/ubin-docs/blob/master/api/UbinPhase2-FabricAPI.pdf).
 
